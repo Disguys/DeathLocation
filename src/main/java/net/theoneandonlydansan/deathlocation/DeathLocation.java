@@ -3,6 +3,7 @@ package net.theoneandonlydansan.deathlocation;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.dimension.DimensionType;
 
@@ -14,14 +15,14 @@ public class DeathLocation {
         DimensionType dimensionType = client.world.getDimension();
         String dimension;
 
-        if (dimensionType.respawnAnchorWorks()) {
+        if (dimensionType.isRespawnAnchorWorking()) {
             dimension = "Nether";
-        } else if (dimensionType.bedWorks()) {
+        } else if (dimensionType.isBedWorking()) {
             dimension = "Overworld";
         } else {
             dimension = "End";
         }
 
-        return Text.translatable("deathlocation.deathmessage", (int) pos.x, (int) pos.y, (int) pos.z, dimension);
+        return new TranslatableText("deathlocation.deathmessage", (int) pos.x, (int) pos.y, (int) pos.z, dimension);
     }
 }
